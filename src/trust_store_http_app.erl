@@ -25,14 +25,14 @@ stop(_State) ->
 start_http(Dispatch, undefined) ->
     start_http(Dispatch, 8080);
 start_http(Dispatch, Port) ->
-    {ok, _} = cowboy:start_http(my_http_listener, 100,
+    {ok, _} = cowboy:start_http(trust_store_http_listener, 100,
                                 [{port, Port}],
                                 [{env, [{dispatch, Dispatch}]}]).
 
 start_https(Dispatch, undefined, SslOptions) ->
     start_https(Dispatch, 8443, SslOptions);
 start_https(Dispatch, Port, SslOptions) ->
-    {ok, _} = cowboy:start_https(https, 100,
+    {ok, _} = cowboy:start_https(trust_store_https_listener, 100,
                                  [{port, Port}] ++ SslOptions,
                                  [{env, [{dispatch, Dispatch}]}]).
 
@@ -55,8 +55,12 @@ get_ssl_options() ->
 
 get_port() ->
     case os:getenv("PORT") of
-        false -> application:get_env(trust_store_http, port, undefined);
-        Port  -> list_to_integer(Port)
+        false   ->
+            application:get_env(trust_store_http, port, undefined);
+        PortEnv ->
+            Port = list_to_integer(PortEnv),
+            application:set_env(trust_store_http, port, Port),
+            Port
     end.
 
 init_config() ->

@@ -30,7 +30,8 @@ terminate(_Reason, _Req, _State) ->
 
 respond(Mtime, Files, Req, State) ->
     ResponseBody = json_encode(Files),
-    Headers = [{<<"Last-Modified">>, cowboy_clock:rfc1123(Mtime)}],
+    Headers = [{<<"Last-Modified">>, cowboy_clock:rfc1123(Mtime)},
+               {<<"content-type">>, <<"application/json">>}],
     {ok, Req2} = cowboy_req:reply(200, Headers, ResponseBody, Req),
     {ok, Req2, State}.
 
