@@ -68,6 +68,4 @@ Port and directory can be also set via config file:
                     {keyfile,"/path/to/server/key.pem"},
                     {verify,verify_peer},
                     {fail_if_no_peer_cert,false}]}]}]
-     }
-    }
 ```
