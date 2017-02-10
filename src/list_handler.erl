@@ -46,15 +46,15 @@ respond_error(Reason, Req, State) ->
     {ok, Req2, State}.
 
 json_encode(Files) ->
-    Map = #{certificates => [ #{id => cert_id(FileName, FileDate),
-                                url => cert_url(FileName)}
+    Map = #{certificates => [ #{id   => cert_id(FileName, FileDate),
+                                path => cert_path(FileName)}
                               || {FileName, FileDate} <- Files ]},
     jsx:encode(Map).
 
 cert_id(FileName, FileDate) ->
     iolist_to_binary(io_lib:format("~s:~p", [FileName, FileDate])).
 
-cert_url(FileName) ->
+cert_path(FileName) ->
     iolist_to_binary(["/certs/", FileName]).
 
 -spec list_files(string()) -> [{string(), file:date_time()}].

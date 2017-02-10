@@ -8,12 +8,12 @@ Will list `.pem` files from the selected directory.
 
 ### API:
 
-- `/` - JSON list of certificates in format `{"certificates":[{"id": <id>, "url": <url>}, ...]}
+- `/` - JSON list of certificates in format `{"certificates":[{"id": <id>, "path": <path>}, ...]}
 - `/certs/<file_name>` - PEM encoded certificate files
 
 ````
 <id> = <file_name>:<file_modification_date>
-<url> = /certs/<file_name>
+<path> = /certs/<file_name>
 <file_name> = name of a PEM file in the listed directory
 ```
 
