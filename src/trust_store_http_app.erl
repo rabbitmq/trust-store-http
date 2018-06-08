@@ -25,14 +25,14 @@ stop(_State) ->
 start_http(Dispatch, undefined) ->
     start_http(Dispatch, 8080);
 start_http(Dispatch, Port) ->
-    {ok, _} = cowboy:start_http(trust_store_http_listener, 100,
+    {ok, _} = cowboy:start_clear(trust_store_http_listener, 100,
                                 [{port, Port}],
                                 [{env, [{dispatch, Dispatch}]}]).
 
 start_https(Dispatch, undefined, SslOptions) ->
     start_https(Dispatch, 8443, SslOptions);
 start_https(Dispatch, Port, SslOptions) ->
-    {ok, _} = cowboy:start_https(trust_store_https_listener, 100,
+    {ok, _} = cowboy:start_tls(trust_store_https_listener, 100,
                                  [{port, Port}] ++ SslOptions,
                                  [{env, [{dispatch, Dispatch}]}]).
 
