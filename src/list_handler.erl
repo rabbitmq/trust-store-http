@@ -4,16 +4,9 @@
 -include_lib("kernel/include/file.hrl").
 
 -export([init/2]).
--export([handle/2]).
 -export([terminate/3]).
 
--record(state, {
-}).
-
-init(Req, _State) ->
-    {ok, Req, #state{}}.
-
-handle(Req, State = #state{}) ->
+init(Req, State) ->
     {ok, Directory} = application:get_env(trust_store_http, directory),
     case list_files(Directory) of
         {ok, Files}  -> respond(Files, Req, State);
@@ -25,14 +18,14 @@ terminate(_Reason, _Req, _State) ->
 
 respond(Files, Req, State) ->
     ResponseBody = json_encode(Files),
-    Headers = [{<<"content-type">>, <<"application/json">>}],
-    {ok, Req2} = cowboy_req:reply(200, Headers, ResponseBody, Req),
+    Headers = #{<<"content-type">> => <<"application/json">>},
+    Req2 = cowboy_req:reply(200, Headers, ResponseBody, Req),
     {ok, Req2, State}.
 
 respond_error(Reason, Req, State) ->
     Error = io_lib:format("Error listing certificates ~p", [Reason]),
     lager:log(error, "~s", [Error]),
-    {ok, Req2} = cowboy_req:reply(500, [], iolist_to_binary(Error), Req),
+    Req2 = cowboy_req:reply(500, [], iolist_to_binary(Error), Req),
     {ok, Req2, State}.
 
 json_encode(Files) ->
