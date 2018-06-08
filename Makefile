@@ -20,4 +20,4 @@ ERLANG_MK_COMMIT = rabbitmq-tmp
 
 include rabbitmq-components.mk
 TEST_DEPS := $(filter-out rabbitmq_test,$(TEST_DEPS))
-include erlang.mk
+include $(if $(ERLANG_MK_FILENAME),$(ERLANG_MK_FILENAME),erlang.mk)
