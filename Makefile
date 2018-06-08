@@ -19,5 +19,4 @@ ERLANG_MK_REPO = https://github.com/rabbitmq/erlang.mk.git
 ERLANG_MK_COMMIT = rabbitmq-tmp
 
 include rabbitmq-components.mk
-TEST_DEPS := $(filter-out rabbitmq_test,$(TEST_DEPS))
-include $(if $(ERLANG_MK_FILENAME),$(ERLANG_MK_FILENAME),erlang.mk)
+include erlang.mk
