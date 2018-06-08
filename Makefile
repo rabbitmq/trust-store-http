@@ -9,8 +9,6 @@ endef
 LOCAL_DEPS = ssl
 DEPS = cowboy jsx lager
 
-dep_cowboy = hex 2.0.0
-
 DEP_EARLY_PLUGINS = rabbit_common/mk/rabbitmq-early-plugin.mk
 DEP_PLUGINS = rabbit_common/mk/rabbitmq-plugin.mk
 

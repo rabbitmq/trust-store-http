@@ -13,6 +13,7 @@
 /plugins/
 /rebar.config
 /rebar.lock
+/_rel/
 /test/ct.cover.spec
 /xrefr
 
