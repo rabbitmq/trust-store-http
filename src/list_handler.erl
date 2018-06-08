@@ -10,7 +10,7 @@
 -record(state, {
 }).
 
-init(Req, State) ->
+init(Req, _State) ->
     {ok, Req, #state{}}.
 
 handle(Req, State = #state{}) ->
