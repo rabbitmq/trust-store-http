@@ -1,19 +1,19 @@
 -module(list_handler).
--behaviour(cowboy_http_handler).
+-behaviour(cowboy_handler).
 
 -include_lib("kernel/include/file.hrl").
 
--export([init/3]).
+-export([init/2]).
 -export([handle/2]).
 -export([terminate/3]).
 
 -record(state, {
 }).
 
-init(_, Req, _Opts) ->
+init(Req, State) ->
     {ok, Req, #state{}}.
 
-handle(Req, State=#state{}) ->
+handle(Req, State = #state{}) ->
     {ok, Directory} = application:get_env(trust_store_http, directory),
     case list_files(Directory) of
         {ok, Files}  -> respond(Files, Req, State);
