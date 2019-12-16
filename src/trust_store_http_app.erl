@@ -9,7 +9,9 @@ start(_Type, _Args) ->
     Directory = get_directory(),
     Port = get_port(),
     Dispatch = cowboy_router:compile([
-        {'_', [{"/", list_handler, []},
+        {'_', [
+               {"/",        trust_store_list_handler, []},
+               {"/invalid", trust_store_invalid_handler, []},
                {"/certs/[...]", cowboy_static,
                 {dir, Directory, [{mimetypes, {<<"text">>, <<"html">>, []}}]}}]}
     ]),

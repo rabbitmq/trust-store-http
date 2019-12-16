@@ -1,4 +1,4 @@
--module(list_handler).
+-module(trust_store_list_handler).
 -behaviour(cowboy_handler).
 
 -include_lib("kernel/include/file.hrl").
