@@ -55,7 +55,7 @@ if you're running the application from source `make run`
 Or it can be specified as an environment variable:
 
 ```
-CERT_DIR="/my/cacert/directory" PORT=8443 CONFIG_FILE=my_config.config ./trust_store_http
+CERT_DIR="/my/cacert/directory" PORT=8443 CONFIG_FILE=my_config.config ./_rel/trust_store_http_release/bin/trust_store_http_release console
 ```
 
 Port and directory can be also set via config file:
