@@ -8,8 +8,9 @@ Will list `.pem` files from the selected directory.
 
 ### API:
 
-- `/` - JSON list of certificates in format `{"certificates":[{"id": <id>, "path": <path>}, ...]}
-- `/certs/<file_name>` - PEM encoded certificate files
+ * `/`: serves a list of certificates in JSON. The format is `{"certificates":[{"id": <id>, "path": <path>}, ...]}`
+ * `/certs/<file_name>`: access for PEM encoded certificate files
+ * `/invlid`: serves invalid JSON, to be used in integration tests
 
 ````
 <id> = <file_name>:<file_modification_date>
@@ -28,7 +29,8 @@ make run CERT_DIR="/my/cacert/directory" PORT=8080
 To run from the pre-built escript (requires Erlang to be installed):
 
 ```
-CERT_DIR="/my/cacert/directory" PORT=8080 ./trust_store_http
+make
+CERT_DIR="/my/cacert/directory" PORT=8080 ./_rel/trust_store_http_release/bin/trust_store_http_release console
 ```
 
 
