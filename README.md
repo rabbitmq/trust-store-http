@@ -1,40 +1,38 @@
-# Trust store HTTP server.
+# Example Trust Store HTTP Server for RabbitMQ
 
-HTTP server to list CA certificates from a directory.
-To use with [RabbitMQ trust store plugin](https://github.com/rabbitmq/rabbitmq-trust-store).
-For demonstration purposes.
+This tiny HTTP server serves CA certificates from a user-specified local directory.
+It is meant to be used with [RabbitMQ trust store plugin](https://github.com/rabbitmq/rabbitmq-trust-store)
+in its test suite and as an example.
 
-Will list `.pem` files from the selected directory.
-
-### API:
+## Endpoints
 
  * `/`: serves a list of certificates in JSON. The format is `{"certificates":[{"id": <id>, "path": <path>}, ...]}`
  * `/certs/<file_name>`: access for PEM encoded certificate files
  * `/invlid`: serves invalid JSON, to be used in integration tests
 
-````
+```
 <id> = <file_name>:<file_modification_date>
 <path> = /certs/<file_name>
 <file_name> = name of a PEM file in the listed directory
 ```
 
-### Usage:
+## Usage
 
 To rebuild and run a release (requires Erlang to be installed):
 
 ```
-make run CERT_DIR="/my/cacert/directory" PORT=8080
+gmake run CERT_DIR="/my/cacert/directory" PORT=8080
 ```
 
 To run from the pre-built escript (requires Erlang to be installed):
 
 ```
-make
+gmake
 CERT_DIR="/my/cacert/directory" PORT=8080 ./_rel/trust_store_http_release/bin/trust_store_http_release console
 ```
 
 
-### HTTPS:
+## HTTPS
 
 To start an HTTPS server, you should provide ssl options. It can be done via
 Erlang `.config` file format:

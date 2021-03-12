@@ -24,7 +24,7 @@ respond(Files, Req, State) ->
 
 respond_error(Reason, Req, State) ->
     Error = io_lib:format("Error listing certificates ~p", [Reason]),
-    lager:log(error, "~s", [Error]),
+    logger:log(error, "~s", [Error]),
     Req2 = cowboy_req:reply(500, [], iolist_to_binary(Error), Req),
     {ok, Req2, State}.
 

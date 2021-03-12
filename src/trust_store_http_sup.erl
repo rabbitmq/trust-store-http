@@ -8,5 +8,10 @@ start_link() ->
 	supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 init([]) ->
-	Procs = [],
-	{ok, {{one_for_one, 1, 5}, Procs}}.
+	Specs = [],
+	Flags = #{
+		strategy  => one_for_one,
+		intensity => 1,
+		period    => 5
+	},
+	{ok, {Flags, Specs}}.
