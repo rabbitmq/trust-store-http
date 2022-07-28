@@ -2,7 +2,7 @@
 
 ## This project HAS MOVED
 
-Find it in the **main RabbitMQ repository under `deps/trust_store_http`.
+Find it in the **main RabbitMQ repository** under `deps/trust_store_http`.
 
 ## Overview
 
