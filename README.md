@@ -1,5 +1,11 @@
 # Example Trust Store HTTP Server for RabbitMQ
 
+## This project HAS MOVED
+
+Find it in the **main RabbitMQ repository under `deps/trust_store_http`.
+
+## Overview
+
 This tiny HTTP server serves CA certificates from a user-specified local directory.
 It is meant to be used with [RabbitMQ trust store plugin](https://github.com/rabbitmq/rabbitmq-trust-store)
 in its test suite and as an example.
